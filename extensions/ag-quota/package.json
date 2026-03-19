@@ -1,0 +1,54 @@
+{
+	"name": "ag-quota",
+	"displayName": "AG Quota",
+	"publisher": "danny-do",
+	"author": {
+		"name": "Danny Do",
+		"email": "erifia.do@gmail.com"
+	},
+	"description": "Displays Antigravity AI quota (Flash, Pro, Claude) in the VS Code status bar",
+	"version": "0.1.0",
+	"engines": {
+		"vscode": "^1.85.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"*"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "agQuota.refresh",
+				"title": "AG Quota: Refresh Now"
+			}
+		],
+		"configuration": {
+			"title": "AG Quota",
+			"properties": {
+				"agQuota.refreshInterval": {
+					"type": "number",
+					"default": 120,
+					"description": "How often (in seconds) to poll for quota updates."
+				},
+				"agQuota.port": {
+					"type": "number",
+					"default": 42424,
+					"description": "Port of the local Antigravity language server."
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./"
+	},
+	"devDependencies": {
+		"@types/node": "^20.0.0",
+		"@types/vscode": "^1.85.0",
+		"typescript": "^5.3.0"
+	}
+}
