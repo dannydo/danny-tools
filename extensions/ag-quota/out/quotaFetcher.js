@@ -4,7 +4,7 @@ exports.fetchQuota = fetchQuota;
 const cp = require("child_process");
 
 const FLASH_KEYWORDS = ['flash'];
-const PRO_KEYWORDS = ['pro', 'ultra', 'gpt'];
+const PRO_KEYWORDS = ['pro', 'ultra'];
 const CLAUDE_KEYWORDS = ['claude', 'anthropic', 'sonnet', 'haiku', 'opus'];
 
 function classifyModel(modelId) {
@@ -152,7 +152,10 @@ async function fetchQuota(port_ignored, timeoutMs = 5000) {
         const quota = { modelId, remainingPercent, resetInSeconds };
 
         const existing = result[bucket];
-        if (!existing || quota.remainingPercent < existing.remainingPercent) {
+        const isHigh = id => id.toLowerCase().includes('high');
+        if (!existing ||
+            quota.remainingPercent < existing.remainingPercent ||
+            (quota.remainingPercent === existing.remainingPercent && isHigh(quota.modelId) && !isHigh(existing.modelId))) {
             result[bucket] = quota;
         }
     }

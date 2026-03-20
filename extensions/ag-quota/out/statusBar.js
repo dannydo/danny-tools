@@ -37,7 +37,7 @@ exports.QuotaStatusBar = void 0;
 const vscode = __importStar(require("vscode"));
 const ENGINE_CONFIG = {
     flash: { label: 'Flash', priority: 102 },
-    pro: { label: 'Pro', priority: 101 },
+    pro: { label: 'High', priority: 101 },
     claude: { label: 'Claude', priority: 100 },
 };
 function quotaDot(pct) {
@@ -69,7 +69,7 @@ class QuotaStatusBar {
     }
     update(result) {
         if (!result) {
-            this.item.text = `Flash ⚫ Pro ⚫ Claude ⚫`;
+            this.item.text = `Flash ⚫ High ⚫ Claude ⚫`;
             this.item.tooltip = `AG Quota — Antigravity offline\nClick to retry`;
             this.item.color = new vscode.ThemeColor('statusBarItem.warningForeground');
             return;
@@ -113,7 +113,7 @@ class QuotaStatusBar {
         }
     }
     setLoading() {
-        this.item.text = `Flash ⏳   Pro ⏳   Claude ⏳`;
+        this.item.text = `Flash ⏳   High ⏳   Claude ⏳`;
         this.item.tooltip = 'AG Quota — loading…';
         this.item.color = undefined;
     }
